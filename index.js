@@ -10,8 +10,11 @@ var directed = 'triangle', undirected = 'none';
 var report_results;
 
 var original_data = {};
-$.get(serverAddr + 'graphs/')
-    .done(function (data) {
+//  $.get(serverAddr + 'graphs/')
+    //  .done(function (data)
+
+
+{
         original_data = data;
 
         var categoriesSelect = $('#categories1');
@@ -155,11 +158,9 @@ $.get(serverAddr + 'graphs/')
             var desc = original_data[action].desc;
             $('#tooltiptextGraphAction').html(desc);
         });
-    })
-    .fail(function (jqXHR, textStatus, errorThrown) {
-        alert(errorThrown);
-    });
+    }
 
+    
 $.get(serverAddr + 'mats/')
     .done(function (data) {
         data.forEach(function (d) {
