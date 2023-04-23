@@ -1,2 +1,2 @@
-# GTeaJS
-JS version GTea
+# WebGTea
+https://webgtea.github.com
