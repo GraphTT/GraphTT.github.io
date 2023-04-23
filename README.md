@@ -1,2 +1,2 @@
 # WebGTea
-https://webgtea.github.com
+https://webgtea.github.io
