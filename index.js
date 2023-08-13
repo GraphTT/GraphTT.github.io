@@ -365,6 +365,7 @@ function Report() {
         });
 }
 
+
 function load_generator(isDraw,webgl,ended,threed) {
     var lay = $('#layouts').find('option:selected').text();
     var type = $('#graphType').find('option:selected').text();
@@ -372,100 +373,83 @@ function load_generator(isDraw,webgl,ended,threed) {
         drawBotanical();
         return;
     }
-    jQuery.ajax({
-        url: 'http://0.0.0.0:2342/add', type: 'POST', contentType: 'application/json',
-        data: JSON.stringify({
-            "type": "gen",
-            "name": $('#gens').find('option:selected').text(),
-            "graph": $('#gens').find('option:selected').text(),
-            "uuid": uuid,
-            "propsKeys": $('#props_keys').html(),
-            "propsVals": $('#props_vals').val(),
-            "directed": type
-        }),
-        dataType: 'json'
-    })
-        .done(function (data) {
-            if (isDraw) {
-                console.log(webgl + " very well  " + threed);
-                if (!webgl && !threed) {
-                    $('#parent_canvas').empty();
-                    $('#parent_canvas').append("<div id='canvas' class='main'>")
-                    initCytoscape(undirected, serverAddr, uuid);
-                    nodeId = 0; //resets counter for freehand vertices
-                    var nodes = data.nodes;
-                    var edges = data.edges;
-                    cy.elements().remove();
-                    cy.add(nodes);
-                    cy.add(edges);
-                    nodeId += nodes.length; //adds the current amount of nodes, so the next freehand item will be max(ids)+1
-                    setVertexIds();
-                    applyLayout();
-                    ended();
-                } else if(!threed) {
-                    viva_action(data);
-                    ended();
-                } else {
 
-                    const gData = {
-                      nodes: data.nodes.map(i => ({ id: i.data.id })),
-                      links: data.edges.map(i => ({ source: i.data.source, target:i.data.target} ))
-                    };
+    if (isDraw) {
+        console.log(webgl + " very well  " + threed);
+        if (!webgl && !threed) {
+            $('#parent_canvas').empty();
+            $('#parent_canvas').append("<div id='canvas' class='main'>")
+            initCytoscape(undirected, serverAddr, uuid);
+            nodeId = 0; //resets counter for freehand vertices
+            let gen = $('#gens').find('option:selected').text();
+            var data = generateGraph(gen,$('#props_vals').val());
+            var nodes = data.nodes;
+            var edges = data.edges;
+            cy.elements().remove();
+            cy.add(nodes);
+            cy.add(edges);
+            nodeId += nodes.length; //adds the current amount of nodes, so the next freehand item will be max(ids)+1
+            setVertexIds();
+            applyLayout();
+            ended();
+        } else if(!threed) {
+            viva_action(data);
+            ended();
+        } else {
 
-                    const Graph = ForceGraph3D()
-                      (document.getElementById('canvas'))
-                        .graphData(gData);
-                    ended();
-                    Graph.onEngineStop(function(){
-                    let { nodes, links } = Graph.graphData();
-                    str = "distance between edge nodes:\n";
-                    console.log(links);
-                    links.forEach(function(e) {
-                        var src = e.source.id;
-                        var tgt = e.target.id;
-                        var n1 = nodes[src];
-                        var n2 = nodes[tgt];
-                        dist = Math.sqrt(
-                             Math.pow(n1.x-n2.x,2) +
-                             Math.pow(n1.y-n2.y,2) +
-                             Math.pow(n1.z-n2.z,2)
-                        );
-                        str += (dist +"").substr(0,6) + ", ";
-                    });
+            const gData = {
+                nodes: data.nodes.map(i => ({ id: i.data.id })),
+                links: data.edges.map(i => ({ source: i.data.source, target:i.data.target} ))
+            };
 
-                    var min_dist = 10000;
-                    nodes.forEach(function(n1) {
-                      nodes.forEach(function(n2) {
-                        if(n1.id > n2.id) {
-                          dist = Math.sqrt(
-                            Math.pow(n1.x-n2.x,2) +
-                            Math.pow(n1.y-n2.y,2) +
-                            Math.pow(n1.z-n2.z,2)
-                          );
-                          if(min_dist > dist)
-                            min_dist = dist;
-                        }
-                      });
-                    });
-                    str += "\nminimum distance between all nodes:\n" + min_dist;
-                    str += "\ncoordinates:\n";
-                    nodes.forEach(function(n) {
-                        sx = (n.x + "").substr(0,6);
-                        sy = (n.y + "").substr(0,6);
-                        sz = (n.z + "").substr(0,6);
-                        str += sx + ", " + sy + ", " + sz + "\n";
-                    });
-                    $("#vis_inf").html(str)
-                    });
+            const Graph = ForceGraph3D()
+                (document.getElementById('canvas'))
+                .graphData(gData);
+            ended();
+            Graph.onEngineStop(function(){
+            let { nodes, links } = Graph.graphData();
+            str = "distance between edge nodes:\n";
+            console.log(links);
+            links.forEach(function(e) {
+                var src = e.source.id;
+                var tgt = e.target.id;
+                var n1 = nodes[src];
+                var n2 = nodes[tgt];
+                dist = Math.sqrt(
+                        Math.pow(n1.x-n2.x,2) +
+                        Math.pow(n1.y-n2.y,2) +
+                        Math.pow(n1.z-n2.z,2)
+                );
+                str += (dist +"").substr(0,6) + ", ";
+            });
 
-//                    console.log(nodes );
-
+            var min_dist = 10000;
+            nodes.forEach(function(n1) {
+                nodes.forEach(function(n2) {
+                if(n1.id > n2.id) {
+                    dist = Math.sqrt(
+                    Math.pow(n1.x-n2.x,2) +
+                    Math.pow(n1.y-n2.y,2) +
+                    Math.pow(n1.z-n2.z,2)
+                    );
+                    if(min_dist > dist)
+                    min_dist = dist;
                 }
-            }
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-        alert(errorThrown);
-    });
-
+                });
+            });
+            str += "\nminimum distance between all nodes:\n" + min_dist;
+            str += "\ncoordinates:\n";
+            nodes.forEach(function(n) {
+                sx = (n.x + "").substr(0,6);
+                sy = (n.y + "").substr(0,6);
+                sz = (n.z + "").substr(0,6);
+                str += sx + ", " + sy + ", " + sz + "\n";
+            });
+            $("#vis_inf").html(str)
+            });
+        }
+    }
+    
     // server(serverAddr + 'draw/'
     //   + $('#categories').find('option:selected').text() + "--"
     //   + $('#reports').find('option:selected').text() + "--" +
