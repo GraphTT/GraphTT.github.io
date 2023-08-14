@@ -108,7 +108,7 @@ function generateGraph(gen,parameters) {
 
     // let category = $('#categories1').find('option:selected').text();
     // let gen = $('#gens').find('option:selected').text();
-
+    console.log(gen);
     if(gen == "CompleteGraphGenerator") {
         return generateCompleteGraph(parseInt(parameters));
     } else if (gen == "GeneralizedPetersonGenerator") {
