@@ -1,3 +1,19 @@
+function extractIntegers(inputStr) {
+    const parts = inputStr.split(',').map(str => str.trim()); // Split by comma and trim whitespace
+    if (parts.length !== 2) {
+        throw new Error('The input string should contain exactly two integers separated by a comma.');
+    }
+    
+    const int1 = parseInt(parts[0], 10);
+    const int2 = parseInt(parts[1], 10);
+
+    if (isNaN(int1) || isNaN(int2)) {
+        throw new Error('Both parts of the input string should be valid integers.');
+    }
+
+    return [int1, int2];
+}
+
 function generateCompleteGraph(n) {
     // n is the number of nodes
     let nodes = [], edges = [];
@@ -23,6 +39,70 @@ function generateCompleteGraph(n) {
     return {nodes: nodes, edges:edges};
 }
 
+function generateGeneralizedPetersenGraph(n, k) {
+    let nodes = [], edges = [];
+
+    // Create the inner vertices v0, v1, ..., v{n-1}
+    for (let i = 0; i < n; i++) {
+        nodes.push({
+            data: { id: `v${i}`, label: `v${i}` }
+        });
+    }
+
+    // Create the outer vertices u0, u1, ..., u{n-1}
+    for (let i = 0; i < n; i++) {
+        nodes.push({
+            data: { id: `u${i}`, label: `u${i}` }
+        });
+    }
+
+    // Connect the inner vertices to form a cycle
+    for (let i = 0; i < n; i++) {
+        edges.push({
+            data: {
+                id: `e_v${i}_v${(i+1)%n}`,
+                source: `v${i}`,
+                target: `v${(i+1)%n}`
+            }
+        });
+    }
+
+    // Connect the outer vertices to form a cycle
+    for (let i = 0; i < n; i++) {
+        edges.push({
+            data: {
+                id: `e_u${i}_u${(i+1)%n}`,
+                source: `u${i}`,
+                target: `u${(i+1)%n}`
+            }
+        });
+    }
+
+    // Connect each vertex vi to ui
+    for (let i = 0; i < n; i++) {
+        edges.push({
+            data: {
+                id: `e_v${i}_u${i}`,
+                source: `v${i}`,
+                target: `u${i}`
+            }
+        });
+    }
+
+    // Connect each vertex ui to v{(i+k) mod n}
+    for (let i = 0; i < n; i++) {
+        edges.push({
+            data: {
+                id: `e_u${i}_v${(i+k)%n}`,
+                source: `u${i}`,
+                target: `v${(i+k)%n}`
+            }
+        });
+    }
+
+    return { nodes: nodes, edges: edges };
+}
+
 
 function generateGraph(gen,parameters) {
 
@@ -31,6 +111,9 @@ function generateGraph(gen,parameters) {
 
     if(gen == "CompleteGraphGenerator") {
         return generateCompleteGraph(parseInt(parameters));
+    } else if (gen == "GeneralizedPetersonGenerator") {
+        let ret = extractIntegers(parameters);
+        return generateCompleteGraph(ret[0],ret[1]);
     }
 
     return generateCompleteGraph(parseInt(parameters));
