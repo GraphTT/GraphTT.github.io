@@ -116,7 +116,7 @@ function generateGraph(gen,parameters) {
     } else if (gen == "GeneralizedPetersonGenerator") {
         console.log("here");
         let ret = extractIntegers(parameters);
-        return generateCompleteGraph(ret[0],ret[1]);
+        return generateGeneralizedPetersenGraph(ret[0],ret[1]);
     }
 
     return generateCompleteGraph(parseInt(parameters));
