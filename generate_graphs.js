@@ -41,6 +41,85 @@ function generateCompleteGraph(n) {
 
 function generateGeneralizedPetersenGraph(n, k) {
     let nodes = [], edges = [];
+    const innerRadius = 50; // Radius for inner circle
+    const outerRadius = 100; // Radius for outer circle
+
+    // Create the inner vertices v0, v1, ..., v{n-1}
+    for (let i = 0; i < n; i++) {
+        let theta = (2 * Math.PI / n) * i;
+        nodes.push({
+            data: { 
+                id: `v${i}`, 
+                label: `v${i}`,
+                x: innerRadius * Math.cos(theta),
+                y: innerRadius * Math.sin(theta)
+            }
+        });
+    }
+
+    // Create the outer vertices u0, u1, ..., u{n-1}
+    for (let i = 0; i < n; i++) {
+        let theta = (2 * Math.PI / n) * i;
+        nodes.push({
+            data: { 
+                id: `u${i}`, 
+                label: `u${i}`,
+                x: outerRadius * Math.cos(theta),
+                y: outerRadius * Math.sin(theta)
+            }
+        });
+    }
+
+    // Connect the inner vertices to form a cycle
+    for (let i = 0; i < n; i++) {
+        edges.push({
+            data: {
+                id: `e_v${i}_v${(i+1)%n}`,
+                source: `v${i}`,
+                target: `v${(i+1)%n}`
+            }
+        });
+    }
+
+    // Connect the outer vertices to form a cycle
+    for (let i = 0; i < n; i++) {
+        edges.push({
+            data: {
+                id: `e_u${i}_u${(i+1)%n}`,
+                source: `u${i}`,
+                target: `u${(i+1)%n}`
+            }
+        });
+    }
+
+    // Connect each vertex vi to ui
+    for (let i = 0; i < n; i++) {
+        edges.push({
+            data: {
+                id: `e_v${i}_u${i}`,
+                source: `v${i}`,
+                target: `u${i}`
+            }
+        });
+    }
+
+    // Connect each vertex ui to v{(i+k) mod n}
+    for (let i = 0; i < n; i++) {
+        edges.push({
+            data: {
+                id: `e_u${i}_v${(i+k)%n}`,
+                source: `u${i}`,
+                target: `v${(i+k)%n}`
+            }
+        });
+    }
+
+    return { nodes: nodes, edges: edges };
+}
+
+
+function generateGeneralizedPetersenGraph2(n, k) {
+    let nodes = [], edges = [];
 
     // Create the inner vertices v0, v1, ..., v{n-1}
     for (let i = 0; i < n; i++) {
