@@ -373,16 +373,14 @@ function load_generator(isDraw,webgl,ended,threed) {
         drawBotanical();
         return;
     }
-
+    let gen = $('#gens').find('option:selected').text();
+    var data = generateGraph(gen,$('#props_vals').val());
     if (isDraw) {
-        console.log(webgl + " very well  " + threed);
         if (!webgl && !threed) {
             $('#parent_canvas').empty();
             $('#parent_canvas').append("<div id='canvas' class='main'>")
             initCytoscape(undirected, serverAddr, uuid);
-            nodeId = 0; //resets counter for freehand vertices
-            let gen = $('#gens').find('option:selected').text();
-            var data = generateGraph(gen,$('#props_vals').val());
+            nodeId = 0; //resets counter for freehand vertices            
             var nodes = data.nodes;
             var edges = data.edges;
             cy.elements().remove();
