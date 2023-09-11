@@ -279,18 +279,7 @@ function generateChainGraph6(n) {
     }
 
     for (let i = 0; i < n; i++) {
-        j = n + i;
-        edges.push({
-            data: {
-                id: `e${i}-${j}`,
-                source: `n${i}`,
-                target: `n${j}`
-            }
-        });
-    }
-
-    for (let i = 0; i < n; i++) {
-        j = 2*n + i;
+        j = n + i + 1;
         edges.push({
             data: {
                 id: `e${i}-${j}`,
@@ -303,9 +292,9 @@ function generateChainGraph6(n) {
     for (let i = 0; i < n; i++) {
         edges.push({
             data: {
-                id: `e${i+n}-${2*n+i}`,
-                source: `n${i+n}`,
-                target: `n${2*n+i}`
+                id: `e${i+1}-${n+i}`,
+                source: `n${i+1}`,
+                target: `n${n+i}`
             }
         });
     }
@@ -316,13 +305,13 @@ function generateChainGraph6(n) {
 function generateChainGraph7(n) {
     let nodes = [], edges = [];
 
-    for (let i = 0; i < 3*n - 1; i++) {
+    for (let i = 0; i < 3*n + 1; i++) {
         nodes.push({
             data: { id: `n${i}`, label: `${i+1}` }
         });
     }
 
-    for (let i = 0; i < n - 1; i++) {
+    for (let i = 0; i < 2*n - 1; i++) {
         let j = i + 1;
         edges.push({
             data: {
@@ -334,47 +323,48 @@ function generateChainGraph7(n) {
     }
 
     for (let i = 0; i < n; i++) {
-        j = n + i;
         edges.push({
             data: {
-                id: `e${j}-${j+1}`,
-                source: `n${j}`,
-                target: `n${j+1}`
+                id: `e${i + 2* n}-${i + 1 + 2* n}`,
+                source: `n${i + 2* n}`,
+                target: `n${i + 1 + 2* n}`
             }
         });
     }
 
-    for (let i = 0; i < n; i++) {
-        j = n + i;
+    for (let i = 0; i < n - 1; i++) {
         edges.push({
             data: {
-                id: `e${i}-${j}`,
-                source: `n${i}`,
-                target: `n${j}`
+                id: `e${i*2 + 1}-${i + 1 + 2* n}`,
+                source: `n${i*2 + 1}`,
+                target: `n${i + 1 + 2* n}`
+            }
+        });
+
+        edges.push({
+            data: {
+                id: `e${i*2 + 1}-${i + 1 + 2* n}`,
+                source: `n${i*2 + 1 + 1}`,
+                target: `n${i + 1 + 2* n}`
             }
         });
     }
 
-    for (let i = 0; i < n; i++) {
-        j = 2*n + i;
-        edges.push({
-            data: {
-                id: `e${i}-${j}`,
-                source: `n${i}`,
-                target: `n${j}`
-            }
-        });
-    }
+    edges.push({
+        data: {
+            id: `e${0}-${2*n}`,
+            source: `n${0}`,
+            target: `n${2*n}`
+        }
+    });
 
-    for (let i = 0; i < n; i++) {
-        edges.push({
-            data: {
-                id: `e${i+n}-${2*n+i}`,
-                source: `n${i+n}`,
-                target: `n${2*n+i}`
-            }
-        });
-    }
+    edges.push({
+        data: {
+            id: `e${2*n - 1}-${3*n}`,
+            source: `n${2*n - 1}`,
+            target: `n${3*n}`
+        }
+    });
 
     return {nodes: nodes, edges:edges};
 }
