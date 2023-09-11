@@ -180,6 +180,204 @@ function generateChainGraph4(n) {
     return {nodes: nodes, edges:edges};
 }
 
+function generateChainGraph5(n) {
+    let nodes = [], edges = [];
+
+    for (let i = 0; i < 3*n - 1; i++) {
+        nodes.push({
+            data: { id: `n${i}`, label: `${i+1}` }
+        });
+    }
+
+    for (let i = 0; i < n - 1; i++) {
+        let j = i + 1;
+        edges.push({
+            data: {
+                id: `e${i}-${j}`,
+                source: `n${i}`,
+                target: `n${j}`
+            }
+        });
+    }
+
+    for (let i = 0; i < n; i++) {
+        j = n + i;
+        edges.push({
+            data: {
+                id: `e${j}-${j+1}`,
+                source: `n${j}`,
+                target: `n${j+1}`
+            }
+        });
+    }
+
+    for (let i = 0; i < n; i++) {
+        j = n + i;
+        edges.push({
+            data: {
+                id: `e${i}-${j}`,
+                source: `n${i}`,
+                target: `n${j}`
+            }
+        });
+    }
+
+    for (let i = 0; i < n; i++) {
+        j = 2*n + i;
+        edges.push({
+            data: {
+                id: `e${i}-${j}`,
+                source: `n${i}`,
+                target: `n${j}`
+            }
+        });
+    }
+
+    for (let i = 0; i < n; i++) {
+        edges.push({
+            data: {
+                id: `e${i+n}-${2*n+i}`,
+                source: `n${i+n}`,
+                target: `n${2*n+i}`
+            }
+        });
+    }
+
+    return {nodes: nodes, edges:edges};
+}
+
+
+function generateChainGraph6(n) {
+    let nodes = [], edges = [];
+
+    for (let i = 0; i < 2*n; i++) {
+        nodes.push({
+            data: { id: `n${i}`, label: `${i+1}` }
+        });
+    }
+
+    for (let i = 0; i < n - 1; i++) {
+        let j = i + 1;
+        edges.push({
+            data: {
+                id: `e${i}-${j}`,
+                source: `n${i}`,
+                target: `n${j}`
+            }
+        });
+    }
+
+    for (let i = 0; i < n; i++) {
+        j = n + i;
+        edges.push({
+            data: {
+                id: `e${j}-${j+1}`,
+                source: `n${j}`,
+                target: `n${j+1}`
+            }
+        });
+    }
+
+    for (let i = 0; i < n; i++) {
+        j = n + i;
+        edges.push({
+            data: {
+                id: `e${i}-${j}`,
+                source: `n${i}`,
+                target: `n${j}`
+            }
+        });
+    }
+
+    for (let i = 0; i < n; i++) {
+        j = 2*n + i;
+        edges.push({
+            data: {
+                id: `e${i}-${j}`,
+                source: `n${i}`,
+                target: `n${j}`
+            }
+        });
+    }
+
+    for (let i = 0; i < n; i++) {
+        edges.push({
+            data: {
+                id: `e${i+n}-${2*n+i}`,
+                source: `n${i+n}`,
+                target: `n${2*n+i}`
+            }
+        });
+    }
+
+    return {nodes: nodes, edges:edges};
+}
+
+function generateChainGraph7(n) {
+    let nodes = [], edges = [];
+
+    for (let i = 0; i < 3*n - 1; i++) {
+        nodes.push({
+            data: { id: `n${i}`, label: `${i+1}` }
+        });
+    }
+
+    for (let i = 0; i < n - 1; i++) {
+        let j = i + 1;
+        edges.push({
+            data: {
+                id: `e${i}-${j}`,
+                source: `n${i}`,
+                target: `n${j}`
+            }
+        });
+    }
+
+    for (let i = 0; i < n; i++) {
+        j = n + i;
+        edges.push({
+            data: {
+                id: `e${j}-${j+1}`,
+                source: `n${j}`,
+                target: `n${j+1}`
+            }
+        });
+    }
+
+    for (let i = 0; i < n; i++) {
+        j = n + i;
+        edges.push({
+            data: {
+                id: `e${i}-${j}`,
+                source: `n${i}`,
+                target: `n${j}`
+            }
+        });
+    }
+
+    for (let i = 0; i < n; i++) {
+        j = 2*n + i;
+        edges.push({
+            data: {
+                id: `e${i}-${j}`,
+                source: `n${i}`,
+                target: `n${j}`
+            }
+        });
+    }
+
+    for (let i = 0; i < n; i++) {
+        edges.push({
+            data: {
+                id: `e${i+n}-${2*n+i}`,
+                source: `n${i+n}`,
+                target: `n${2*n+i}`
+            }
+        });
+    }
+
+    return {nodes: nodes, edges:edges};
+}
 
 
 function generateGeneralizedPetersenGraph(n, k) {
@@ -341,6 +539,16 @@ function generateGraph(gen,parameters) {
         return generateGeneralizedPetersenGraph(ret[0],ret[1]);
     } else if (gen == "ExampleChainGraph1") {
         return generateChainGraph1(parseInt(parameters));
+    } else if (gen == "ExampleChainGraph2") {
+        return generateChainGraph2(parseInt(parameters));
+    } else if (gen == "ExampleChainGraph4") {
+        return generateChainGraph4(parseInt(parameters));
+    } else if (gen == "ExampleChainGraph5") {
+        return generateChainGraph5(parseInt(parameters));
+    } else if (gen == "ExampleChainGraph6") {
+        return generateChainGraph6(parseInt(parameters));
+    } else if (gen == "ExampleChainGraph7") {
+        return generateChainGraph7(parseInt(parameters));
     }
 
     return generateCompleteGraph(parseInt(parameters));
