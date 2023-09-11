@@ -114,8 +114,73 @@ function generateChainGraph2(n) {
         });
     }
 
+function generateChainGraph4(n) {
+    let nodes = [], edges = [];
+
+    for (let i = 0; i < 3*n - 1; i++) {
+        nodes.push({
+            data: { id: `n${i}`, label: `${i+1}` }
+        });
+    }
+
+    for (let i = 0; i < n - 1; i++) {
+        let j = i + 1;
+        edges.push({
+            data: {
+                id: `e${i}-${j}`,
+                source: `n${i}`,
+                target: `n${j}`
+            }
+        });
+    }
+
+    for (let i = 0; i < n; i++) {
+        j = n + i;
+        edges.push({
+            data: {
+                id: `e${j}-${j+1}`,
+                source: `n${j}`,
+                target: `n${j+1}`
+            }
+        });
+    }
+
+    for (let i = 0; i < n; i++) {
+        j = n + i;
+        edges.push({
+            data: {
+                id: `e${i}-${j}`,
+                source: `n${i}`,
+                target: `n${j}`
+            }
+        });
+    }
+
+    for (let i = 0; i < n; i++) {
+        j = 2*n + i;
+        edges.push({
+            data: {
+                id: `e${i}-${j}`,
+                source: `n${i}`,
+                target: `n${j}`
+            }
+        });
+    }
+
+    for (let i = 0; i < n; i++) {
+        edges.push({
+            data: {
+                id: `e${i+n+1}-${2*n+i}`,
+                source: `n${i+n+1}`,
+                target: `n${2*n+i}`
+            }
+        });
+    }
+
     return {nodes: nodes, edges:edges};
 }
+
+
 
 function generateGeneralizedPetersenGraph(n, k) {
     let nodes = [], edges = [];
