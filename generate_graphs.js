@@ -39,6 +39,39 @@ function generateCompleteGraph(n) {
     return {nodes: nodes, edges:edges};
 }
 
+function generateChainGraph1(n) {
+    let nodes = [], edges = [];
+
+    for (let i = 0; i < 2*n; i++) {
+        nodes.push({
+            data: { id: `n${i}`, label: `${i+1}` }
+        });
+    }
+
+    for (let i = 0; i < n - 1; i++) {
+        let j = i + 1;
+        edges.push({
+            data: {
+                id: `e${i}-${j}`,
+                source: `n${i}`,
+                target: `n${j}`
+            }
+        });
+    }
+    for (let i = 0; i < n; i++) {
+        j = n + i;
+        edges.push({
+            data: {
+                id: `e${i}-${j}`,
+                source: `n${i}`,
+                target: `n${j}`
+            }
+        });
+    }
+
+    return {nodes: nodes, edges:edges};
+}
+
 function generateGeneralizedPetersenGraph(n, k) {
     let nodes = [], edges = [];
     const innerRadius = 50; // Radius for inner circle
@@ -196,6 +229,8 @@ function generateGraph(gen,parameters) {
         console.log("here");
         let ret = extractIntegers(parameters);
         return generateGeneralizedPetersenGraph(ret[0],ret[1]);
+    } else if (gen == "ExampleChainGraph1") {
+        return generateChainGraph1(parseInt(parameters));
     }
 
     return generateCompleteGraph(parseInt(parameters));
