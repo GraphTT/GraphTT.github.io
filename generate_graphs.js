@@ -28,15 +28,21 @@ function addEdge(edges, sourceIndex, targetIndex) {
     addEdgePrefix(edges, 'n', sourceIndex, 'n', targetIndex);
 }
 
+function addNode(nodes, id) {
+    nodes.push({
+            data: { id: `n${id}`, label: `${id+1}` }
+    });
+}
+
+function addNodes(nodes, n) {
+    for (let i = 0; i < n; i++) 
+        addNode(nodes, i);
+}
+
 function generateCompleteGraph(n) {
-    // n is the number of nodes
     let nodes = [], edges = [];
 
-    for (let i = 0; i < n; i++) {
-        nodes.push({
-            data: { id: `n${i}`, label: `${i+1}` }
-        });
-    }
+    addNodes(nodes,n);
 
     for (let i = 0; i < n; i++) {
         for (let j = i + 1; j < n; j++) {
@@ -50,12 +56,8 @@ function generateCompleteGraph(n) {
 function generateChainGraph1(n) {
     let nodes = [], edges = [];
 
-    for (let i = 0; i < 2*n; i++) {
-        nodes.push({
-            data: { id: `n${i}`, label: `${i+1}` }
-        });
-    }
-
+    addNodes(nodes,2*n);
+    
     for (let i = 0; i < n - 1; i++) {
         let j = i + 1;
         addEdge(edges,i,j);
@@ -72,11 +74,7 @@ function generateChainGraph1(n) {
 function generateChainGraph2(n) {
     let nodes = [], edges = [];
 
-    for (let i = 0; i < 2*n; i++) {
-        nodes.push({
-            data: { id: `n${i}`, label: `${i+1}` }
-        });
-    }
+    addNodes(nodes,2*n);
 
     for (let i = 0; i < n - 1; i++) {
         let j = i + 1;
@@ -99,11 +97,7 @@ function generateChainGraph2(n) {
 function generateChainGraph4(n) {
     let nodes = [], edges = [];
 
-    for (let i = 0; i < 3*n - 1; i++) {
-        nodes.push({
-            data: { id: `n${i}`, label: `${i+1}` }
-        });
-    }
+    addNodes(nodes,3*n - 1);
 
     for (let i = 0; i < n - 1; i++) {
         let j = i + 1;
@@ -135,11 +129,7 @@ function generateChainGraph4(n) {
 function generateChainGraph5(n) {
     let nodes = [], edges = [];
 
-    for (let i = 0; i < 3*n - 1; i++) {
-        nodes.push({
-            data: { id: `n${i}`, label: `${i+1}` }
-        });
-    }
+    addNodes(nodes, 3*n - 1);
 
     for (let i = 0; i < n - 1; i++) {
         let j = i + 1;
@@ -172,11 +162,7 @@ function generateChainGraph5(n) {
 function generateChainGraph6(n) {
     let nodes = [], edges = [];
 
-    for (let i = 0; i < 2*n; i++) {
-        nodes.push({
-            data: { id: `n${i}`, label: `${i+1}` }
-        });
-    }
+    addNodes(nodes, 2*n);
 
     for (let i = 0; i < n - 1; i++) {
         let j = i + 1;
@@ -203,11 +189,7 @@ function generateChainGraph6(n) {
 function generateChainGraph7(n) {
     let nodes = [], edges = [];
 
-    for (let i = 0; i < 3*n + 1; i++) {
-        nodes.push({
-            data: { id: `n${i}`, label: `${i+1}` }
-        });
-    }
+    addNodes(nodes, 3*n + 1);
 
     for (let i = 0; i < 2*n - 1; i++) {
         let j = i + 1;
