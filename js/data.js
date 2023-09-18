@@ -50,5 +50,6 @@ data = {
       }
     ],
     reports: [],
-    algorithms: []
+    algorithms: [],
+    actions:[]
   }
