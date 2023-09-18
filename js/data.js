@@ -59,35 +59,5 @@ data = {
       "props": [
         "n:Integer:4"
       ]
-    },
-    "ExampleChainGraph1": {
-      "desc": "Chain Graph 1",
-      "props": [
-        "n:Integer:4"
-      ]
-    },
-    "ExampleChainGraph6": {
-      "desc": "Chain Graph 6",
-      "props": [
-        "n:Integer:5"
-      ]
-    },
-    "ExampleChainGraph4": {
-      "desc": "Chain Graph 4",
-      "props": [
-        "n:Integer:5"
-      ]
-    },
-    "ExampleChainGraph7": {
-      "desc": "Chain Graph 7",
-      "props": [
-        "n:Integer:5"
-      ]
-    },
-    "ExampleChainGraph5": {
-      "desc": "Chain Graph 5",
-      "props": [
-        "n:Integer:5"
-      ]
-    },
+    }
   }
