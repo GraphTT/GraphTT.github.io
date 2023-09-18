@@ -2,7 +2,7 @@ data = {
     "graphs": [
       {
         "name": "ExampleChainGraph2",
-        "category": "Maxwell Examples",
+        "category": "Examples",
         "desc": "Chain Graph 2",
         "properties": [
           "n:Integer:9"
@@ -10,7 +10,7 @@ data = {
       },
       {
         "name": "ExampleChainGraph3",
-        "category": "Maxwell Examples",
+        "category": "Examples",
         "desc": "Chain Graph 1",
         "properties": [
           "n:Integer:4"
@@ -18,7 +18,7 @@ data = {
       },
       {
         "name": "ExampleChainGraph1",
-        "category": "Maxwell Examples",
+        "category": "Examples",
         "desc": "Chain Graph 1",
         "properties": [
           "n:Integer:4"
@@ -26,7 +26,7 @@ data = {
       },
       {
         "name": "ExampleChainGraph6",
-        "category": "Maxwell Examples",
+        "category": "Examples",
         "desc": "Chain Graph 6",
         "properties": [
           "n:Integer:5"
@@ -34,7 +34,7 @@ data = {
       },
       {
         "name": "ExampleChainGraph7",
-        "category": "Maxwell Examples",
+        "category": "Examples",
         "desc": "Chain Graph 7",
         "properties": [
           "n:Integer:5"
@@ -42,7 +42,7 @@ data = {
       },
       {
         "name": "ExampleChainGraph5",
-        "category": "Maxwell Examples",
+        "category": "Examples",
         "desc": "Chain Graph 5",
         "properties": [
           "n:Integer:5"
