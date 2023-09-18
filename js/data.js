@@ -49,5 +49,6 @@ data = {
         ]
       }
     ],
-    reports: []
+    reports: [],
+    algorithms: []
   }
