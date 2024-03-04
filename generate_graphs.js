@@ -77,18 +77,15 @@ function generateChainGraph2(n) {
     addNodes(nodes,2*n);
 
     for (let i = 0; i < n - 1; i++) {
-        let j = i + 1;
-        addEdge(edges,i,j);
+        addEdge(edges,i,i + 1);
     }
 
-    for (let i = 0; i < n; i++) {
-        j = n + i;
-        addEdge(edges,j,j+1);
+    for (let i = 0; i < n - 1; i++) {
+        addEdge(edges,i+n,i + 1 + n);
     }
 
-    for (let i = 0; i < n; i++) {
-        j = n + i;
-        addEdge(edges,i,j);
+    for (let i = 0; i < n; i = i + 2) {
+        addEdge(edges,i,n + i);
     }
 
     return {nodes: nodes, edges:edges};

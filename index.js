@@ -572,10 +572,15 @@ function load_graph(type,isDraw,webgl,ended,threed) {
                   links: data.edges.map(i => ({ source: i.data.source, target:i.data.target} ))
                 };
 
-                const Graph = ForceGraph3D()
-                  (document.getElementById('canvas'))
-                    .graphData(gData);
-                ended();
+                // const Graph = ForceGraph3D()
+                //   (document.getElementById('canvas'))
+                //     .graphData(gData);
+                // ended();
+
+                if(!d33d)
+                threed_force_graph_action(data,ended);
+                else
+                threed_force_graph_action_d33d(data,ended);
 
             }
         }
