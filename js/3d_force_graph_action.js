@@ -269,13 +269,9 @@ function stats(Graph,selectedNodes) {
             
             src = parseInt(src1.substr(1));
             tgt = parseInt(tgt1.substr(1));
-            console.log(src);
-            console.log(tgt);
             var n1 = nodes[src];
             var n2 = nodes[tgt];
-            
-            console.log(n1);
-            console.log(n2);
+
             dist = Math.sqrt(
                  Math.pow(n1.__threeObj.position.x-n2.__threeObj.position.x,2) +
                  Math.pow(n1.__threeObj.position.y-n2.__threeObj.position.y,2) +
