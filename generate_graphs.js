@@ -97,23 +97,19 @@ function generateChainGraph4(n) {
     addNodes(nodes,3*n - 1);
 
     for (let i = 0; i < n - 1; i++) {
-        let j = i + 1;
-        addEdge(edges,i,j);
+        addEdge(edges,i,i+1);
+    }
+
+    for (let i = 0; i < n - 1; i++) {
+        addEdge(edges,i+n,i+1+n);
     }
 
     for (let i = 0; i < n; i++) {
-        j = n + i;
-        addEdge(edges,j,j+1);
+        addEdge(edges,i,n+i);
     }
 
-    for (let i = 0; i < n; i++) {
-        j = n + i;
-        addEdge(edges,i,j);
-    }
-
-    for (let i = 0; i < n; i++) {
-        j = 2*n + i;
-        addEdge(edges,i,j);
+    for (let i = 0; i < n - 1; i++) {
+        addEdge(edges,i,2*n + i);
     }
 
     for (let i = 0; i < n; i++) {
@@ -129,26 +125,22 @@ function generateChainGraph5(n) {
     addNodes(nodes, 3*n - 1);
 
     for (let i = 0; i < n - 1; i++) {
-        let j = i + 1;
-        addEdge(edges,i,j);
+        addEdge(edges,i,i+1);
+    }
+
+    for (let i = 0; i < n - 1; i++) {
+        addEdge(edges,i+n,i + 1 + n);
     }
 
     for (let i = 0; i < n; i++) {
-        j = n + i;
-        addEdge(edges,j,j+1);
+        addEdge(edges,i,n+i);
     }
 
-    for (let i = 0; i < n; i++) {
-        j = n + i;
-        addEdge(edges,i,j);
+    for (let i = 0; i < n - 1; i++) {
+        addEdge(edges,i,2*n+i);
     }
 
-    for (let i = 0; i < n; i++) {
-        j = 2*n + i;
-        addEdge(edges,i,j);
-    }
-
-    for (let i = 0; i < n; i++) {
+    for (let i = 0; i < n - 1; i++) {
         addEdge(edges,i+n,2*n+i);
     }
 
@@ -162,21 +154,15 @@ function generateChainGraph6(n) {
     addNodes(nodes, 2*n);
 
     for (let i = 0; i < n - 1; i++) {
-        let j = i + 1;
-        addEdge(edges,i,j);
+        addEdge(edges,i,i+1);
     }
 
-    for (let i = 0; i < n; i++) {
-        j = n + i;
-        addEdge(edges,j,j+1);
+    for (let i = 0; i < n - 1; i++) {
+        addEdge(edges,i + n,i + 1 + n);
     }
 
-    for (let i = 0; i < n; i++) {
-        j = n + i + 1;
-        addEdge(edges,i,j);
-    }
-
-    for (let i = 0; i < n; i++) {
+    for (let i = 0; i < n - 1; i++) {
+        addEdge(edges,i,n + i + 1);
         addEdge(edges,i+1,n+i);
     }
 
