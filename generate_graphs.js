@@ -112,10 +112,9 @@ function generateChainGraph4(n) {
         addEdge(edges,i,2*n + i);
     }
 
-    for (let i = 0; i < n; i++) {
+    for (let i = 0; i < n-1; i++) {
         addEdge(edges,i+n+1,2*n+i);
     }
-
     return {nodes: nodes, edges:edges};
 }
 
