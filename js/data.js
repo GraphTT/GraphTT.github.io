@@ -9,9 +9,9 @@ data = {
         ]
       },
       {
-        "name": "ExampleChainGraph3",
+        "name": "ExampleChainGraph4",
         "category": "Examples",
-        "desc": "Chain Graph 1",
+        "desc": "Chain Graph 4",
         "properties": [
           "n:Integer:4"
         ]
