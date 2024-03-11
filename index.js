@@ -94,7 +94,6 @@ var original_data = {};
         //            });
     });
 
-    console.log(category_reports);
     reportCategories.on('change', function () {
         reportsSelect.empty();
         category_reports[getSelectedReportCategory()].forEach(function (d) {
@@ -161,12 +160,12 @@ var original_data = {};
 }
 
 
-$.get(serverAddr + 'mats/')
-    .done(function (data) {
-        data.forEach(function (d) {
-            $('#existing_mat').append("<option>" + d + "</option>");
-        });
-    });
+// $.get(serverAddr + 'mats/')
+//     .done(function (data) {
+//         data.forEach(function (d) {
+//             $('#existing_mat').append("<option>" + d + "</option>");
+//         });
+//     });
 
 function graphAction() {
     var actionProps = "";
@@ -213,7 +212,6 @@ function graphAlgorithm(status) {
         //     + ($('#reportPropsKeys').html() + ":" + $('#reportPropsVals').val())
         //     + "--" + uuid)
         .done(function (data) {
-            console.log(data);
             var arr = data.steps;
             if (status == 'load_algorithm') {
                 for (var stepCounter = 0; stepCounter < arr.length; stepCounter++) {
@@ -240,7 +238,6 @@ function graphAlgorithm(status) {
                             var colors = stepMessage[2].split(',');
                             var edge_colors = stepMessage[4].split(',');
                             stepCounter++;
-                            console.log(stepCounter);
                             for (i = 0; i < colors.length - 1; i++) {
                                 cy.nodes('[id = "' + i + '"]').style('background-color', distinctColors[Object.keys(distinctColors)[colors[i]]]);
                             }
@@ -252,14 +249,7 @@ function graphAlgorithm(status) {
                 }
                 myMove(data);
             }
-            //            console.log(arr);
-            //            for(var i=0;i<arr.length;i++) {
-            //                var colors = arr[i].split("+++")[2].split(',');
-            //                console.log(colors);
-            //                for(i=0;i<colors.length-1;i++) {
-            //                    cy.nodes('[id = "' + i +  '"]').style('background-color', 'green');
-            //                }
-            //}
+
             return;
             report_results = data;
             if (data.titles != undefined) {
@@ -394,8 +384,6 @@ function load_generator(isDraw, webgl, ended, threed, d33d) {
             viva_action(data);
             ended();
         } else {
-            console.log(data);
-
             if (!d33d)
                 threed_force_graph_action(data, ended);
             else
