@@ -14,8 +14,5 @@ edges as springs that behave according to Hooke’s Law.
 repulsive force between them described by Coulomb’s Law.
 
 
-This tool is created based on a web-based Graph reporting and algorithm framework.
-
-https://webgtea.github.io
-
-It is a try to have a complete JS version of GraphTea.
+This tool is created based on a web-based Graph reporting and algorithm framework [WebGTea](https://webgtea.github.io) which 
+is a try to have a complete JS version of [GraphTea](http://graphtheorysoftware.com/).
