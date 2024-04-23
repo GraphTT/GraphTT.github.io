@@ -1,4 +1,4 @@
-<img src="graphtt_icon.png" alt="GraphT-T" width="100"/>
+<img src="graphtt_icon.png" alt="GraphT-T" width="150"/>
 
 # GraphT-T
 
