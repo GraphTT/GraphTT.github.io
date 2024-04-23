@@ -1,4 +1,4 @@
-![GraphT-T](graphtt_icon.png)
+<img src="graphtt_icon.png" alt="GraphT-T" width="100"/>
 
 # GraphT-T
 
