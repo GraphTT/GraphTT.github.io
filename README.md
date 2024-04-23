@@ -1,3 +1,5 @@
+![GraphT-T](graphtt_icon.png)
+
 # GraphT-T
 
 GraphT–T (V1.0Beta), a program for embedding and visualizing quasi-
