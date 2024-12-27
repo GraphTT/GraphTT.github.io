@@ -511,6 +511,52 @@ function load_free(ended) {
     ended();
 }
 
+function passStringToWasm(str) {
+    const lengthBytes = Module.lengthBytesUTF8(str) + 1; // +1 for the null terminator
+    const stringOnWasmHeap = Module._malloc(lengthBytes);
+    
+    Module.stringToUTF8(str, stringOnWasmHeap, lengthBytes);
+    const returnedPointer = Module.__Z12print_stringPKc(stringOnWasmHeap);
+    const returnedString = Module.UTF8ToString(returnedPointer);
+    Module._free(returnedPointer); 
+    Module._free(stringOnWasmHeap);
+    return returnedString;
+}
+
+function convertToCytoscapeGraph(edgeString) {
+    // Split the string by "--" to get individual edges
+    const edgesArray = edgeString.split("--").slice(0, -1); // Remove the last empty element due to extra "--"
+
+    const nodes = {};
+    const edges = [];
+
+    // Iterate over each edge and extract source and target vertices
+    edgesArray.forEach(edge => {
+    let [source, target] = edge.split(",");
+    // Increment the source and target vertices to start from 1
+    source = parseInt(source) + 1;
+    target = parseInt(target) + 1;
+
+    // Add nodes to the nodes object (this ensures no duplicates)
+    nodes[source] = { data: { id: source.toString() } };
+    nodes[target] = { data: { id: target.toString() } };
+
+    // Add edge to the edges array
+    edges.push({
+        data: {
+            id: `${source}-${target}`,
+            source: source.toString(),
+            target: target.toString()
+        }
+    });
+    });
+
+    return {
+    nodes: Object.values(nodes),
+    edges: edges
+    };
+}
+
 function load_graph(type, isDraw, webgl, ended, threed) {
     var str = $('#' + type + 'string').val().replace(/\n/g, "-");
     var isDirected = $('#graphType').find('option:selected').text();
@@ -527,8 +573,10 @@ function load_graph(type, isDraw, webgl, ended, threed) {
     if (matName != 'No selection') {
         str = matName;
     }
-    server(serverAddr + 'loadGraph' + '/' + type + "--"
-        + str + "--" + isDirected + "--" + uuid, function (data) {
+    data = convertToCytoscapeGraph(passStringToWasm(str))
+
+//    server(serverAddr + 'loadGraph' + '/' + type + "--"
+//        + str + "--" + isDirected + "--" + uuid, function (data) {
             if (isDraw) {
                 if (!webgl && !threed) {
                     // cy = cytoscape({
@@ -569,7 +617,7 @@ function load_graph(type, isDraw, webgl, ended, threed) {
 
                 }
             }
-        });
+//        });
 }
 
 function showOnGraph() {
