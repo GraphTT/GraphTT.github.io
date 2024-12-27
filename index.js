@@ -610,10 +610,8 @@ function load_graph(type, isDraw, webgl, ended, threed) {
                         links: data.edges.map(i => ({ source: i.data.source, target: i.data.target }))
                     };
 
-                    if (!d33d)
-                        threed_force_graph_action(data, ended);
-                    else
-                        threed_force_graph_action_d33d(data, ended);
+                    threed_force_graph_action(data, ended);
+                    //threed_force_graph_action_d33d(data, ended);
 
                 }
             }
